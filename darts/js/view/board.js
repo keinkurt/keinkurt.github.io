@@ -6,7 +6,7 @@ Board = Backbone.View.extend(function () {
         "<div id='restart-dialog'>",
             "<p>",
                 "<span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>",
-                "Do you realy want to restart the game?",
+                "Do you really want to restart the game?",
             "</p>",
         "</div>",
         "<div class='row board-header'>",
@@ -92,29 +92,29 @@ Board = Backbone.View.extend(function () {
     footerTemplate = [
         "<div class='row board-footer'>",
             "<div class='small-1 columns'>&nbsp;</div>",
-            "<% if (players < 3) { %>",
+            "<% if (typeof(player3) === 'undefined') { %>",
                 "<div class='small-2 columns'>&nbsp;</div>",
             "<% } %>",
             "<div class='small-2 columns player1'><%= player1 %></div>",
-            "<% if (players > 2) { %>",
+            "<% if (typeof(player3) !== 'undefined') { %>",
                 "<div class='small-2 columns player2'><%= player2 %></div>",
             "<% } %>",
             "<div class='small-2 columns'>",
                 "<a href='javascript:void(0)' class='alert button js-undo'>Undo</a>",
             "</div>",
-            "<% if (players === 2) { %>",
+            "<% if (typeof(player2) !== 'undefined' && typeof(player3) === 'undefined') { %>",
                 "<div class='small-2 columns player2'><%= player2 %></div>",
             "<% } %>",
-            "<% if (players > 2) { %>",
+            "<% if (typeof(player3) !== 'undefined') { %>",
                 "<div class='small-2 columns player3'><%= player3 %></div>",
             "<% } %>",
-            "<% if (players > 3) { %>",
+            "<% if (typeof(player4) !== 'undefined') { %>",
                 "<div class='small-2 columns player4'><%= player4 %></div>",
             "<% } %>",
-            "<% if (players < 4) { %>",
+            "<% if (typeof(player4) === 'undefined') { %>",
                 "<div class='small-2 columns'>&nbsp;</div>",
             "<% } %>",
-            "<% if (players < 2) { %>",
+            "<% if (typeof(player2) === 'undefined') { %>",
                 "<div class='small-2 columns'>&nbsp;</div>",
             "<% } %>",
             "<div class='small-1 columns'>&nbsp;</div>",
@@ -145,22 +145,6 @@ Board = Backbone.View.extend(function () {
 
         view.logic.initialize(view);
 
-        $('#restart-dialog').dialog( {
-            title:      "Restart game?",
-            autoOpen:   false,
-            width:      500,
-            resizable:  false,
-            buttons:    {
-                Restart: function() {
-                    $(this).dialog("close");
-                    view.newGame();
-                    view.render();
-                },
-                Cancel: function() {
-                    $(this).dialog("close");
-                }
-            }
-        } );
     }
 
     function newGame() {
@@ -192,6 +176,23 @@ Board = Backbone.View.extend(function () {
 
         view.$(".board-score .player").removeClass("active");
         $(".board-score ." + view.state.player).addClass("active");
+
+        $('#restart-dialog').dialog( {
+            title:      "Restart game?",
+            autoOpen:   false,
+            width:      500,
+            resizable:  false,
+            buttons:    {
+                Restart: function() {
+                    $(this).dialog("close");
+                    view.newGame();
+                    view.render();
+                },
+                Cancel: function() {
+                    $(this).dialog("close");
+                }
+            }
+        } );
     }
 
     function updateScoreMark(event) {
