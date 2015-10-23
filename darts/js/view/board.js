@@ -203,6 +203,11 @@ Board = Backbone.View.extend(function () {
         var view    = this,
             $mark   = $(event.currentTarget);
 
+        if (view.state.nextTimer) {
+            clearTimeout(view.state.nextTimer);
+        }
+        view.state.nextTimer = setTimeout('$(".js-next").trigger("click")', 5000);
+
         view.logic.updateScore( $mark, view, function() { return postUpdateScore(view) } );
     }
 
@@ -220,12 +225,11 @@ Board = Backbone.View.extend(function () {
     }
 
     function interpretPlayer($elem) {
-        return
-            $elem.hasClass("player1") ? 1 :
-            $elem.hasClass("player2") ? 2 :
-            $elem.hasClass("player3") ? 3 :
-            $elem.hasClass("player4") ? 4 :
-            0;
+        return $elem.hasClass("player1") ? 1
+            : $elem.hasClass("player2") ? 2
+            : $elem.hasClass("player3") ? 3
+            : $elem.hasClass("player4") ? 4
+            : 0;
     }
 
     function preventTextSelection(event) {
@@ -262,11 +266,11 @@ Board = Backbone.View.extend(function () {
 
     function editPlayer(event) {
         var view = this,
-            $target = $(event.currentTarget),
+            $target = $(event.currentTarget);
             player = interpretPlayer($target);
 
-        $(".board-header ." + player).addClass("editing");
-        $(".board-header ." + player + " > input").focus().select();
+        $(".board-header .player" + player).addClass("editing");
+        $(".board-header .player" + player + " > input").focus().select();
     }
 
     function updateOnEnter(event) {
@@ -282,8 +286,8 @@ Board = Backbone.View.extend(function () {
              player = interpretPlayer( $target.parent() );
 
          view.state.playerNames[player] = value;
-         $(".board-header ." + player + " .view").html(value);
-         $(".board-header ." + player).removeClass("editing");
+         $(".board-header .player" + player + " .view").html(value);
+         $(".board-header .player" + player).removeClass("editing");
     }
 
     var events = {
