@@ -203,9 +203,7 @@ Board = Backbone.View.extend(function () {
         var view    = this,
             $mark   = $(event.currentTarget);
 
-        if (view.state.nextTimer) {
-            clearTimeout(view.state.nextTimer);
-        }
+        clearTimeout(view.state.nextTimer);
         view.state.nextTimer = setTimeout('$(".js-next").trigger("click")', 5000);
 
         view.logic.updateScore( $mark, view, function() { return postUpdateScore(view) } );
@@ -240,6 +238,7 @@ Board = Backbone.View.extend(function () {
     function next() {
         var view = this;
 
+        clearTimeout(view.state.nextTimer);
         view.logic.next(view, function() {
             view.render();
         } );
