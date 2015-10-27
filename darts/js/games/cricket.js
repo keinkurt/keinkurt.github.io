@@ -25,8 +25,8 @@
             setTimeout(function () {
                 $(".player" + player + ".js-value-" + valueText)
                     .stop()
-                    .css({backgroundColor: "#ddd"})
-                    .animate({backgroundColor: "transparent"}, 1500);
+                    .css({backgroundColor: "#43AC6A"})
+                    .animate({backgroundColor: "#C5FFDB"}, 1500);
             }, 100);
 
             view.collection.forEach(function (mark) {
@@ -148,7 +148,7 @@
             var currentPlayer   = parseInt(view.state.player),
                 nextPlayer      = currentPlayer === view.state.players ? 1 : currentPlayer + 1;
 
-            if (nextPlayer === 1) {
+            if (nextPlayer == view.state.startPlayer) {
                 view.state.rounds++;
             }
 
@@ -183,7 +183,7 @@
             }
             else if (type === "next") {
                 view.state.player = player;
-                if (currentPlayer === 1) {
+                if (currentPlayer == view.state.startPlayer) {
                     view.state.rounds--;
                 }
             }
