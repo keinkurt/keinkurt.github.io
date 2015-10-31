@@ -13,16 +13,16 @@
 <nav class="top-bar js-nav-bar" data-topbar>
   <ul class="title-area">
     <li class="name">
-      <h1><a href="javascript:void(0);">Darts</a></h1>
+      <h1><a href="javascript:void(0)">Darts</a></h1>
     </li>
   </ul>
 
   <section class="top-bar-section">
     <!-- Left Nav Section -->
     <ul class="left" style="text-align:center;">
-      <li class="divider"></li>
+      <li class="divider" />
       <li class="name game-title">
-        <h1><a href="#" class="text-large js-game-title"></a></h1>
+        <h1><a href="javascript:void(0)" onClick="$('#restart-dialog').dialog('open')" class="js-game-title"></a></h1>
       </li>
     </ul>
   </section>
@@ -36,6 +36,12 @@
 </nav>
 
 <div class="row board"></div>
+<div id='restart-dialog'>
+  <p>
+    <span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>
+    Do you really want to restart the game?
+  </p>
+</div>
 
 <div class="js-config-container"></div>
 
@@ -59,6 +65,23 @@ $(function () {
     window.Page = new Darts({
         el: $('body')[0]
     });
+
+    $('#restart-dialog').dialog( {
+        title:      "Restart game?",
+        autoOpen:   false,
+        width:      500,
+        resizable:  false,
+        buttons:    {
+            Restart: function() {
+                $(this).dialog("close");
+                view.newGame();
+                view.render();
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    } );
 });
 </script>
 </body>

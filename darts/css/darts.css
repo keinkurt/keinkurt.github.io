@@ -2,6 +2,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Arial;
     font-size: 1rem; }
 
+#restart-dialog {
+    display: none;
+}
+
 .board {
     padding-top: 1.25rem;
     text-align: center; }
@@ -78,10 +82,6 @@ body {
     left: 50%;
     width: 110px;
     margin-left: -55px;
-}
-
-.text-large {
-    font-size: 1.5rem;
 }
 
 /* -- Modal -- */
