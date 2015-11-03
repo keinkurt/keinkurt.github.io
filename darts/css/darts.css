@@ -2,10 +2,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Arial;
     font-size: 1rem; }
 
-#restart-dialog {
-    display: none;
-}
-
 .board {
     padding-top: 1.25rem;
     text-align: center; }
@@ -16,7 +12,7 @@ body {
     font-size: 3rem; }
 
 .board-header {
-    font-size: 3rem;
+    font-size: 1.8rem;
     border-bottom: 1px solid #000; }
 
 .board-header .columns {
