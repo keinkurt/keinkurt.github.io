@@ -76,8 +76,8 @@ body {
 .top-bar .game-title {
     position: absolute;
     left: 50%;
-    width: 110px;
-    margin-left: -55px;
+    width: 200px;
+    margin-left: -100px;
 }
 
 /* -- Modal -- */
