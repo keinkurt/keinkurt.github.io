@@ -179,16 +179,27 @@ Board = Backbone.View.extend(function () {
         var view    = this,
             $mark   = $(event.currentTarget);
 
-        clearTimeout(view.state.nextTimer);
-        view.state.nextTimer = setTimeout('$(".js-next").trigger("click")', 4000);
+        view.logic.updateScore( $mark, view, function() { return postUpdateScore(view) } );
+    }
+
+    function updateScoreValue(event) {
+        var view    = this,
+            $target = $(event.currentTarget),
+            $mark   = $target.siblings('.js-mark'),
+            player  = interpretPlayer($target);
+
+        if (player != view.state.player) {
+            return false;
+        }
 
         view.logic.updateScore( $mark, view, function() { return postUpdateScore(view) } );
     }
 
     function postUpdateScore(view) {
+        clearTimeout(view.state.nextTimer);
+
         if (view.state.finished) {
             var name = view.state.playerNames[view.state.finished];
-            clearTimeout(view.state.nextTimer);
 
             if ( window.confirm(name + " has won. Restart the game?") ) {
                 view.newGame();
@@ -197,6 +208,10 @@ Board = Backbone.View.extend(function () {
                 view.state.finished = undefined;
             }
         }
+        else {
+            view.state.nextTimer = setTimeout('$(".js-next").trigger("click")', 4000);
+        }
+
         view.render();
     }
 
@@ -279,6 +294,7 @@ Board = Backbone.View.extend(function () {
 
     var events = {
         "click      .js-mark":          updateScoreMark,
+        "click      .player":           updateScoreValue,
         "click      .js-next":          next,
         "click      .js-undo":          undo,
         "mousedown  .columns":          preventTextSelection,
