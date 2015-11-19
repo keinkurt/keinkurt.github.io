@@ -1,0 +1,78 @@
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.board {
+    padding-top: 1.25rem;
+    text-align: center; }
+
+.board-header {
+    font-size: 1.8rem;
+    border-bottom: 1px solid #000;
+}
+
+.board-header .rounds {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.board-header .columns {
+    padding: 0.8rem;
+}
+
+.board-header .active {
+    background-color: #43AC6A;
+    color: #fff; }
+
+.board-header .edit {
+    display: none;
+}
+
+.board-header .editing .edit {
+    display: block;
+}
+
+.board-header .editing .view {
+    display: none;
+}
+
+.board-section {
+    font-size: 2rem;
+    border-bottom: 2px solid #BBB;
+}
+
+.board-score.closed {
+    background-color: #eee;
+}
+
+.board-score .columns {
+    font-size: 3rem;
+    height: 4.5rem;
+}
+
+.board-score .active {
+    background-color: #C5FFDB;
+}
+
+.board-divider {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.board-footer {
+    font-size: 3rem;
+    font-weight: bold;
+    border-top: 1px solid #000;
+}
+
+.board-footer .columns {
+    padding: 1rem;
+}
+
+
